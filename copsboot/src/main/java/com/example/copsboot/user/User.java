@@ -1,41 +1,37 @@
 package com.example.copsboot.user;
 
-import java.awt.print.Book;
-import java.util.Set;
-import java.util.UUID;
+import com.example.orm.jpa.AbstractEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-public class User {
-    private UUID id;
-    private String name;
+@Entity
+@Table(name = "copsboot_user")
+public class User extends AbstractEntity<UserId> {
+
     private String email;
-    private String password;
-    Set<UserRole> roles;
+    private AuthServerId authServerId;
+    private String mobileToken;
 
-    public User(UUID id, String name, String email, String password, Set<UserRole> roles) {
-        this.id = id;
-        this.name = name;
+    protected User() {
+
+    }
+
+    public User(UserId id, String email, AuthServerId authServerId, String mobileToken) {
+        super(id);
         this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+        this.authServerId = authServerId;
+        this.mobileToken = mobileToken;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public AuthServerId getAuthServerId() { //<.>
+        return authServerId;
     }
 
-    public Set<UserRole> getRoles() {
-        return roles;
+    public String getMobileToken() {
+        return mobileToken;
     }
 }
